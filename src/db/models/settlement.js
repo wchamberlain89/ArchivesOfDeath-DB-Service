@@ -10,9 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
   }, {});
   Settlement.associate = function(models) {
-    Settlement.hasOne(models.Inventory, {
-      foreignKey: 'settlementId'
-    })
+    Settlement.belongsToMany(models.Resource, { through : models.SettlementResource, foreignKey : "settlementId" })
   };
   return Settlement;
 };

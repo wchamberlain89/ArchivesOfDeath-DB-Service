@@ -1,8 +1,8 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Items', {
-      itemId: {
+    return queryInterface.createTable('Resources', {
+      resourceId: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
@@ -25,6 +25,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Items');
+    return queryInterface.dropTable('Resources');
   }
 };

@@ -1,22 +1,22 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('InventoryItems', {
-      invId: {
+    return queryInterface.createTable('InventoryResources', {
+      settlementId: {
         allowNull: false,
         primaryKey: true,
         references: {
-          model: 'Inventories',
-          key: 'invId'
+          model: 'Settlements',
+          key: 'settlementId'
         },
         type: Sequelize.INTEGER
       },
-      itemId: {
+      resourceId: {
         allowNull: false,
         primaryKey: true,
         references: {
-          model: 'Items',
-          key: 'itemId'
+          model: 'Resources',
+          key: 'resourceId'
         },
         type: Sequelize.INTEGER
       },
@@ -34,6 +34,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('InventoryItems');
+    return queryInterface.dropTable('InventoryResources');
   }
 };
