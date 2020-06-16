@@ -1,10 +1,12 @@
 {
-  "name": "Inventory",
+  "name": "inventory",
   "version": "1.0.0",
   "description": "Inventory Tracker",
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
+    "axios": "^0.19.2",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "mysql2": "^2.1.0",
     "nodemon": "^2.0.4",
@@ -12,6 +14,6 @@
     "sequelize-cli": "^5.5.1"
   },
   "scripts": {
-    "test": "nodemon src/index.js"
+    "test": "nodemon src/app.js"
   }
 }

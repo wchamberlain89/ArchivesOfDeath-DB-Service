@@ -11,7 +11,8 @@ module.exports = (sequelize, DataTypes) => {
     description: DataTypes.STRING
   }, {});
   Item.associate = function(models) {
-    Item.belongsToMany(models.Inventory, { through: models.InventoryItem, foreignKey: 'itemId' })
+    Item.belongsToMany(models.Inventory, { through: models.InventoryItem, foreignKey: 'itemId' }),
+    Item.hasMany(models.InventoryItem, {foreignKey: "itemId"});
   };
   return Item;
 };

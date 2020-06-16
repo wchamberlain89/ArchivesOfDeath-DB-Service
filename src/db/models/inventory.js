@@ -21,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'settlementId'
     })
     Inventory.belongsToMany(models.Item, { through: models.InventoryItem, foreignKey: 'invId', as: 'items' });
+    Inventory.hasMany(models.InventoryItem, {foreignKey: "invId"});
   };
   return Inventory;
 };
