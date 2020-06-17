@@ -1,7 +1,7 @@
 'use strict';
 const axios = require('axios');
 const models = require('../models');
-const Item = models.Item;
+const Resource = models.Resource;
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
@@ -22,14 +22,14 @@ module.exports = {
       ]
     })
     .then(response => {
-      response.data.forEach(item => (console.log(item.name)));
-      return Item.bulkCreate(response.data);
+      response.data.forEach(resource => (console.log(resource.name)));
+      return Resource.bulkCreate(response.data);
     })
     .catch(error => console.log(error));
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('Items', null, {});
+    return queryInterface.bulkDelete('Resources', null, {});
     /*
       Add reverting commands here.
       Return a promise to correctly handle asynchronicity.
