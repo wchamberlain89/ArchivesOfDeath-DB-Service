@@ -1,7 +1,7 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const SettlementResource = sequelize.define('SettlementResource', {
-    invId: {
+    settlementId: {
       allowNull:false,
       references: {
         model: "Settlement",
@@ -20,8 +20,8 @@ module.exports = (sequelize, DataTypes) => {
     qty: DataTypes.INTEGER
   }, {});
   SettlementResource.associate = function(models) {
-    SettlementResource.belongsTo(models.Resource, { foreignKey: "resourceId" });
-    SettlementResource.belongsTo(models.Settlement, { foreignKey: "settlementId" });
+    SettlementResource.belongsTo(models.Resource, { foreignKey: "resourceId", as: "resourceInfo" });
+    SettlementResource.belongsTo(models.Settlement, { foreignKey: "settlementId", as: "settlement" });
   };
   return SettlementResource;
 };

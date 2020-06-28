@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Settlement.associate = function(models) {
     Settlement.belongsToMany(models.Resource, { through : models.SettlementResource, foreignKey : "settlementId" })
+    Settlement.belongsToMany(models.Gear, { through : models.SettlementGear, foreignKey : "settlementId" })
   };
   return Settlement;
 };

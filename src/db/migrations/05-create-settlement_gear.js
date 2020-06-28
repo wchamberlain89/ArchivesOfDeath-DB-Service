@@ -1,7 +1,6 @@
-'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('SettlementResources', {
+    return queryInterface.createTable('SettlementGear', {
       settlementId: {
         allowNull: false,
         primaryKey: true,
@@ -11,12 +10,12 @@ module.exports = {
         },
         type: Sequelize.INTEGER
       },
-      resourceId: {
+      gearId: {
         allowNull: false,
         primaryKey: true,
         references: {
-          model: 'Resources',
-          key: 'resourceId'
+          model: 'Gear',
+          key: 'gearId'
         },
         type: Sequelize.INTEGER
       },
@@ -34,6 +33,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('SettlementResources');
+    return queryInterface.dropTable('SettlementGear');
   }
 };
