@@ -15,7 +15,9 @@ module.exports = {
           return Object.values(resources).reduce((acc, resource, index) => {
             acc.push({
               name: resource.name, 
-              description: resource.flavor_text})
+              description: resource.flavor_text,
+              resourceType: resource.sub_type_pretty
+            })
             return acc;
           }, []);
         }

@@ -8,7 +8,8 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
     },
     name: DataTypes.STRING,
-    description: DataTypes.STRING
+    description: DataTypes.STRING,
+    resourceType: DataTypes.STRING
   }, {});
   Resource.associate = function(models) {
     Resource.belongsToMany(models.Settlement, { through: models.SettlementResource, foreignKey: 'resourceId' }),

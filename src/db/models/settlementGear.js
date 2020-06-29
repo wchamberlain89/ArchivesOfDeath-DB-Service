@@ -1,3 +1,4 @@
+'use strict';
 module.exports = (sequelize, DataTypes) => {
   const SettlementGear = sequelize.define('SettlementGear', {
     settlementId: {
