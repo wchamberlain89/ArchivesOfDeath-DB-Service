@@ -11,7 +11,6 @@ module.exports = (sequelize, DataTypes) => {
     effect: DataTypes.TEXT
   }, {});
   FightingArt.associate = function(models) {
-    console.log(models);
     FightingArt.belongsToMany(models.Survivor, { through: models.SurvivorFightingArt, foreignKey: 'fightingArtId' });
     FightingArt.hasMany(models.SurvivorFightingArt, { foreignKey: "fightingArtId" });
   };

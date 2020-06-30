@@ -1,22 +1,22 @@
 'use strict';
 const axios = require('axios');
 const models = require('../models');
-const FightingArt = models.FightingArt;
+const Disorder = models.Disorder;
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return axios({
-      url: 'https://api.kdm-manager.com/game_asset/fighting_arts',
+      url: 'https://api.kdm-manager.com/game_asset/disorders',
       method: 'get',
       transformResponse: [
         response => {
-          const fightingArt = JSON.parse(response);
+          const disorder = JSON.parse(response);
           
-          return Object.values(fightingArt).reduce((acc, fightingArt, index) => {
-            console.log("Fighting Art is -", fightingArt);
+          return Object.values(disorder).reduce((acc, disorder, index) => {
+            console.log("Fighting Art is -", disorder);
             acc.push({
-              name: fightingArt.name, 
-              effect: fightingArt.desc
+              name: disorder.name, 
+              effect: disorder.survivor_effect
             })
             return acc;
           }, []);
@@ -24,9 +24,9 @@ module.exports = {
       ]
     })
     .then(response => {
-      response.data.forEach(fightingArt => (console.log(fightingArt)));
+      response.data.forEach(disorder => (console.log(disorder)));
         
-      return FightingArt.bulkCreate(response.data);
+      return Disorder.bulkCreate(response.data);
     })
     .catch(error => console.log(error));
   },
