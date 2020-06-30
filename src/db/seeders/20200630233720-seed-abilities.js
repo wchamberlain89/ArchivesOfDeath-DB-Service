@@ -1,38 +1,39 @@
 'use strict';
 const axios = require('axios');
 const models = require('../models');
-const Disorder = models.Disorder;
+const Ability = models.Ability;
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return axios({
-      url: 'https://api.kdm-manager.com/game_asset/disorders',
+      url: 'https://api.kdm-manager.com/game_asset/abilities_and_impairments',
       method: 'get',
       transformResponse: [
         response => {
-          const disorder = JSON.parse(response);
+          const ability = JSON.parse(response);
           
-          return Object.values(disorder).reduce((acc, disorder, index) => {
-            console.log("Fighting Art is -", disorder);
-            acc.push({
-              name: disorder.name, 
-              effect: disorder.survivor_effect
-            })
+          return Object.values(ability).reduce((acc, ability, index) => {
+            if(ability.sub_type === 'ability') {
+              acc.push({
+                name: ability.name, 
+                effect: ability.desc
+              });
+            }
             return acc;
           }, []);
         }
       ]
     })
     .then(response => {
-      response.data.forEach(disorder => (console.log(disorder)));
+      response.data.forEach(ability => (console.log(ability)));
         
-      return Disorder.bulkCreate(response.data);
+      return Ability.bulkCreate(response.data);
     })
     .catch(error => console.log(error));
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('Disorders', null, {})
+    return queryInterface.bulkDelete('Abilities', null, {})
     /*
       Add reverting commands here.
       Return a promise to correctly handle asynchronicity.
