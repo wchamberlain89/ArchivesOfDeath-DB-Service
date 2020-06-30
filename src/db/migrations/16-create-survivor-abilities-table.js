@@ -1,6 +1,6 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('SurvivorDisorders', {
+    return queryInterface.createTable('SurvivorAbilities', {
       survivorId: {
         allowNull: false,
         primaryKey: true,
@@ -10,12 +10,12 @@ module.exports = {
         },
         type: Sequelize.INTEGER
       },
-      disorderId: {
+      abilityId: {
         allowNull: false,
         primaryKey: true,
         references: {
-          model: 'Disorders',
-          key: 'disorderId'
+          model: 'Abilities',
+          key: 'abilityId'
         },
         type: Sequelize.INTEGER
       },
@@ -30,6 +30,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('SurvivorDisorders');
+    return queryInterface.dropTable('SurvivorAbilities');
   }
 };
