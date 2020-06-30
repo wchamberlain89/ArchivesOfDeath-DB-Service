@@ -27,6 +27,7 @@ module.exports = (sequelize, DataTypes) => {
     Survivor.belongsToMany(models.Ability, { through: models.SurvivorAbility, foreignKey: 'survivorId' });
     Survivor.belongsToMany(models.Impairment, { through: models.SurvivorImpairment, foreignKey: 'survivorId' });
     Survivor.belongsTo(models.Settlement, { foreignKey: "settlementId", as: "settlement" });
+    Survivor.hasOne(models.SurvivorAttributes, { foreignKey: "survivorId" });
   };
   return Survivor;
 };
