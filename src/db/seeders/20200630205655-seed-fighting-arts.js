@@ -10,9 +10,10 @@ module.exports = {
       method: 'get',
       transformResponse: [
         response => {
-          const gear = JSON.parse(response);
+          const fightingArt = JSON.parse(response);
           
           return Object.values(fightingArt).reduce((acc, fightingArt, index) => {
+            console.log("Fighting Art is -", fightingArt);
             acc.push({
               name: fightingArt.name, 
               effect: fightingArt.desc
@@ -23,7 +24,7 @@ module.exports = {
       ]
     })
     .then(response => {
-      response.data.forEach(fightingArt => (console.log(fightingArt.name)));
+      response.data.forEach(fightingArt => (console.log(fightingArt)));
         
       return FightingArt.bulkCreate(response.data);
     })

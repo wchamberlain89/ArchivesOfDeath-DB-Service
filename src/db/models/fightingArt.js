@@ -8,10 +8,11 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
     },
     name: DataTypes.STRING,
-    effect: DataTypes.STRING
+    effect: DataTypes.TEXT
   }, {});
   FightingArt.associate = function(models) {
-    FightingArt.belongsToMany(models.Survivor, { through: models.SurvivorFightingArt, foreignKey: 'fightingArtId' }),
+    console.log(models);
+    FightingArt.belongsToMany(models.Survivor, { through: models.SurvivorFightingArt, foreignKey: 'fightingArtId' });
     FightingArt.hasMany(models.SurvivorFightingArt, { foreignKey: "fightingArtId" });
   };
   return FightingArt;

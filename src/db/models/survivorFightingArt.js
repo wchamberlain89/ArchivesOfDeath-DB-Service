@@ -1,6 +1,6 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const SurviviorFightingArt = sequelize.define('SurviviorFightingArt', {
+  const SurviviorFightingArt = sequelize.define('SurvivorFightingArt', {
     survivorId: {
       allowNull:false,
       references: {
@@ -17,9 +17,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       type: DataTypes.INTEGER
     },
-  }, {
-    freezeTableName: true
-  });
+  }, {});
   SurviviorFightingArt.associate = function(models) {
     SurviviorFightingArt.belongsTo(models.FightingArt, { foreignKey: "fightingArtId", as: "info" });
     SurviviorFightingArt.belongsTo(models.Survivor, { foreignKey: "survivorId", as: "survivor" });

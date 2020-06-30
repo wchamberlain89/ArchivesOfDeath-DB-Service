@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
     freezeTableName: true
   });
   Gear.associate = function(models) {
-    Gear.belongsToMany(models.Settlement, { through: models.SettlementGear, foreignKey: 'gearId' }),
+    Gear.belongsToMany(models.Settlement, { through: models.SettlementGear, foreignKey: 'gearId' });
     Gear.hasMany(models.SettlementGear, { foreignKey: "gearId" });
   };
   return Gear;
