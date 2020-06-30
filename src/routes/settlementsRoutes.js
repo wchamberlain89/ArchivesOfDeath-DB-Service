@@ -18,4 +18,8 @@ router.put('/:settlementId/resources/:resourceId', settlementController.update_s
 
 router.get('/:settlementId/gear/', settlementController.get_settlement_gear);
 
+router.post('/:settlementId/gear/:gearId', settlementController.add_settlement_gear);
+
+router.put('/:settlementId/gear/:gearId', settlementController.update_settlement_gear);
+
 module.exports = router;

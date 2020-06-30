@@ -5,7 +5,9 @@ const Gear = models.Gear;
 
 exports.get_all_resources = async (req, res) => {
   const options = {
-      attributes: ['name', 'resourceId', 'description']
+      attributes: {
+        exclude: ['createdAt', 'updatedAt']
+      }
   }
   const items = await Resource.findAll(options)
   res.json(items);

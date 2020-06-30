@@ -1,42 +1,35 @@
-'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Survivors', {
+    return queryInterface.createTable('SurvivorFightingArts', {
       survivorId: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER
-      },
-      settlementId: {
         allowNull: false,
         primaryKey: true,
         references: {
-          model: 'Settlements',
-          key: 'settlementId'
+          model: 'Survivors',
+          key: 'survivorId'
         },
         type: Sequelize.INTEGER
       },
-      name: {
-        type: Sequelize.STRING
-      },
-      survival: {
-        type: Sequelize.INTEGER
-      },
-      gender: {
+      fightingArtId: {
+        allowNull: false,
+        primaryKey: true,
+        references: {
+          model: 'FightingArts',
+          key: 'fightingArtId'
+        },
         type: Sequelize.INTEGER
       },
       createdAt: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.DATE
       },
       updatedAt: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.DATE
       }
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Survivors');
+    return queryInterface.dropTable('SurvivorFightingArts');
   }
 };

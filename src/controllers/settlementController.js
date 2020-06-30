@@ -41,7 +41,8 @@ exports.get_settlement_resources = async (req, res) => {
     res.send(settlementInventory);
 };
 
-const fullItemQuery = (settlementId, resourceId) => {
+//Query options for settlementItem plus iteminfo
+const fullResourceQueryOption = (settlementId, resourceId) => {
   return ( 
     {
       where : {
@@ -51,12 +52,13 @@ const fullItemQuery = (settlementId, resourceId) => {
       attributes: ['qty', 'resourceId'],
       include : {
         association : 'resourceInfo',
-        attributes : ['name', 'description']
+        attributes : {
+          exclude : ['createdAt', 'updatedAt', 'resourceId']
+        }
       }
     }
   )
 }
-//Query option for settlementItem plus iteminfo
 
 exports.add_settlement_resource = async (req, res) => {
     const settlementId = req.params.settlementId;
@@ -71,7 +73,7 @@ exports.add_settlement_resource = async (req, res) => {
 
     await SettlementResource.create(resource);
     
-    const fullResourceInfo = await SettlementResource.findOne(fullItemQuery(settlementId, resourceId));
+    const fullResourceInfo = await SettlementResource.findOne(fullResourceQueryOption(settlementId, resourceId));
 
     res.send(fullResourceInfo);
 };
@@ -83,12 +85,27 @@ exports.update_settlement_resource = async (req, res) => {
 
   const updatedResource = await SettlementResource.update({ qty: qty }, { where: { settlementId, resourceId }, returning: true });
   
-  const fullResourceInfo = await SettlementResource.findOne(fullItemQuery(settlementId, resourceId)).catch(err => console.log("Error in update_settlement_resource is ", err));
+  const fullResourceInfo = await SettlementResource.findOne(fullResourceQueryOption(settlementId, resourceId)).catch(err => console.log("Error in update_settlement_resource is ", err));
 
   res.send(fullResourceInfo);
 }
 
 // SETTLEMENT GEAR
+const fullGearQueryOption = (settlementId, gearId) => {
+  return ( 
+    {
+      where : {
+      settlementId,
+      gearId
+      },
+      attributes: ['qty', 'gearId'],
+      include : {
+        association : 'gearInfo',
+        attributes : ['name', 'description']
+      }
+    }
+  )
+}
 
 exports.get_settlement_gear = async (req, res) => {
   const settlementId = req.params.settlementId;
@@ -100,7 +117,7 @@ exports.get_settlement_gear = async (req, res) => {
       include: {
         association : "gearInfo",
         attributes : {
-          exclude : ['createdAt', 'updatedAt', 'resourceId']
+          exclude : ['createdAt', 'updatedAt', 'gearId']
         },
       }
   }
@@ -110,30 +127,31 @@ exports.get_settlement_gear = async (req, res) => {
 
 exports.add_settlement_gear = async (req, res) => {
   const settlementId = req.params.settlementId;
-  const gearId = parseInt(req.params.resourceId);
+  const gearId = parseInt(req.params.gearId);
   const qty = req.body.qty;
   
-  const resource = {
-      settlementId, 
-      gearId, 
-      qty
+  const gear = {
+    settlementId, 
+    gearId, 
+    qty
   }
 
-  await SettlementResource.create(resource);
-  
-  const fullResourceInfo = await SettlementResource.findOne(fullItemQuery(settlementId, gearId));
+  const createdGear = await SettlementGear.create(gear).catch(err => console.log(err))
+  const completeGearInfo = await SettlementGear.findOne(fullGearQueryOption(createdGear.settlementId, createdGear.gearId))
 
-  res.send(fullResourceInfo);
+  res.json(completeGearInfo);
 };
 
 exports.update_settlement_gear = async (req, res) => {
   const settlementId = req.params.settlementId;
-  const resourceId = parseInt(req.params.resourceId);
+  const gearId = parseInt(req.params.gearId);
   const qty = req.body.qty;
 
-  const updatedResource = await SettlementResource.update({ qty: qty }, { where: { settlementId, resourceId }, returning: true });
+  console.log("updating settlement gear item")
 
-  const fullResourceInfo = await SettlementResource.findOne(fullItemQuery(settlementId, resourceId)).catch(err => console.log("Error in update_settlement_resource is ", err));
+  const updatedGear = await SettlementGear.update({ qty: qty }, { where: { settlementId, gearId }, returning: true });
 
-  res.send(fullResourceInfo);
+  const completeGearInfo = await SettlementGear.findOne(fullGearQueryOption(settlementId, gearId)).catch(err => console.log("Error in update_settlement_resource is ", err));
+
+  res.json(completeGearInfo);
 }
