@@ -58,35 +58,35 @@ const Item = models.Item;
 //   console.error(("Inventory Query Error: "), err);
 // })
 
-InventoryItem.bulkCreate([
-  {
-    invId: 1,
-    itemId: 1,
-    qty: 6
-  },
-  {
-    invId: 1,
-    itemId: 2,
-    qty: 5
-  },
-  {
-    invId: 1,
-    itemId: 3,
-    qty: 4
-  }
-])
-.then( InventoryItems => {
-  Inventory.findByPk(1, { include: ['items'] })
-  .then(res => {
-    res.items.forEach( item => console.log("Item data is ", item.dataValues.InventoryItem.dataValues));
-  })
-  .catch(err => {
-    console.log("error is ***********", err);
-  })
-})
-.catch(err => {
-  console.log("error is ************", err);
-})
+// InventoryItem.bulkCreate([
+//   {
+//     invId: 1,
+//     itemId: 1,
+//     qty: 6
+//   },
+//   {
+//     invId: 1,
+//     itemId: 2,
+//     qty: 5
+//   },
+//   {
+//     invId: 1,
+//     itemId: 3,
+//     qty: 4
+//   }
+// ])
+// .then( InventoryItems => {
+//   Inventory.findByPk(1, { include: ['items'] })
+//   .then(res => {
+//     res.items.forEach( item => console.log("Item data is ", item.dataValues.InventoryItem.dataValues));
+//   })
+//   .catch(err => {
+//     console.log("error is ***********", err);
+//   })
+// })
+// .catch(err => {
+//   console.log("error is ************", err);
+// })
 
 // Inventory.findByPk(2, {include: ['items']})
 // .then( res => {
@@ -95,3 +95,5 @@ InventoryItem.bulkCreate([
 // .catch( err => {
 //   console.log( err )
 // })
+
+models.Survivor.create({settlementId: 1, name: "Frank", gender: 1});

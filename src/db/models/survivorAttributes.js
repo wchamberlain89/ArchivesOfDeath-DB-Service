@@ -15,12 +15,30 @@ module.exports = (sequelize, DataTypes) => {
       },
       type: DataTypes.INTEGER
     },
-    movement: DataTypes.INTEGER,
-    accuracy: DataTypes.INTEGER,
-    strength: DataTypes.INTEGER,
-    evasion: DataTypes.INTEGER,
-    luck: DataTypes.INTEGER,
-    speed: DataTypes.INTEGER
+    movement: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0
+    },
+    accuracy: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0
+    },
+    strength: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0
+    },
+    evasion: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0
+    },
+    luck: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0
+    },
+    speed: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0
+    }
   }, {
     freezeTableName: true
   });

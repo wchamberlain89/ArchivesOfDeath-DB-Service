@@ -1,4 +1,7 @@
 'use strict';
+const models = require('./index');
+const SurvivorAttributes = models.SurvivorAttributes;
+
 module.exports = (sequelize, DataTypes) => {
   const Survivor = sequelize.define('Survivor', {
     survivorId: {
@@ -16,10 +19,17 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER
     },
     name: DataTypes.STRING,
-    survival: DataTypes.INTEGER,
+    survival: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0
+    },
     gender: DataTypes.INTEGER
   }, {
-    freezeTableName: true
+    hooks: {
+      afterCreate(survivor, options) {
+        survivor.sequelize.models.SurvivorAttributes.create({ survivorId: survivor.survivorId });
+      }
+    },
   });
   Survivor.associate = function(models) {
     Survivor.belongsToMany(models.FightingArt, { through: models.SurvivorFightingArt, foreignKey: 'survivorId' });
