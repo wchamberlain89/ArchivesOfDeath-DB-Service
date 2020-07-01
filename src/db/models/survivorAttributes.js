@@ -40,10 +40,10 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: 0
     }
   }, {
-    freezeTableName: true
+    tableName: 'SurvivorAttributes'
   });
   SurvivorAttributes.associate = function(models) {
-    SurvivorAttributes.belongsTo(models.Survivor, { foreignKey: 'survivorId' })
+    SurvivorAttributes.belongsTo(models.Survivor, { foreignKey: 'survivorId', as: 'attributes' })
   };
   return SurvivorAttributes;
 };

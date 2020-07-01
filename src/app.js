@@ -8,14 +8,16 @@ const db = require('./db/models');
 //Route Imports
 const settlementsRouter = require('./routes/settlementsRoutes');
 const assetsRouter = require('./routes/assetsRoutes');
+const survivorsRouter = require('./routes/survivorsRoutes');
 
 //Middleware
 app.use(cors());
 app.use(bodyParser.json());
 
 //Routers
-app.use('/settlements', settlementsRouter);
 app.use('/assets', assetsRouter);
+app.use('/settlements', settlementsRouter);
+app.use('/settlements/:settlementId/survivors', survivorsRouter);
 
 
 

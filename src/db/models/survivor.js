@@ -1,6 +1,4 @@
 'use strict';
-const models = require('./index');
-const SurvivorAttributes = models.SurvivorAttributes;
 
 module.exports = (sequelize, DataTypes) => {
   const Survivor = sequelize.define('Survivor', {
@@ -27,6 +25,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     hooks: {
       afterCreate(survivor, options) {
+        console.log(this.associations)
         survivor.sequelize.models.SurvivorAttributes.create({ survivorId: survivor.survivorId });
       }
     },
@@ -37,7 +36,7 @@ module.exports = (sequelize, DataTypes) => {
     Survivor.belongsToMany(models.Ability, { through: models.SurvivorAbility, foreignKey: 'survivorId' });
     Survivor.belongsToMany(models.Impairment, { through: models.SurvivorImpairment, foreignKey: 'survivorId' });
     Survivor.belongsTo(models.Settlement, { foreignKey: "settlementId", as: "settlement" });
-    Survivor.hasOne(models.SurvivorAttributes, { foreignKey: "survivorId" });
+    Survivor.hasOne(models.SurvivorAttributes, { foreignKey: "survivorId", as: "attributes" });
   };
   return Survivor;
 };
