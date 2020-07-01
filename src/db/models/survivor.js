@@ -25,7 +25,6 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     hooks: {
       afterCreate(survivor, options) {
-        console.log(this.associations)
         survivor.sequelize.models.SurvivorAttributes.create({ survivorId: survivor.survivorId });
       }
     },
