@@ -17,7 +17,8 @@ app.use(bodyParser.json());
 //Routers
 app.use('/assets', assetsRouter);
 app.use('/settlements', settlementsRouter);
-app.use('/settlements/:settlementId/survivors', survivorsRouter);
+app.use('/survivors', survivorsRouter);
+
 
 
 

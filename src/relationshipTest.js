@@ -96,4 +96,14 @@ const Item = models.Item;
 //   console.log( err )
 // })
 
-models.Survivor.create({settlementId: 1, name: "Frank", gender: 1});
+// models.Survivor.create({settlementId: 1, name: "Frank", gender: 1});
+
+// models.SurvivorDisorder.create({survivorId: 10, disorderId: 1});
+// models.SurvivorDisorder.create({survivorId: 10, disorderId: 2});
+// models.SurvivorDisorder.create({survivorId: 10, disorderId: 3});
+models.SurvivorFightingArt.create({survivorId: 10, fightingArtId: 1}).catch(err => console.log(err));
+models.SurvivorFightingArt.create({survivorId: 10, fightingArtId: 2}).catch(err => console.log(err));
+models.SurvivorFightingArt.create({survivorId: 10, fightingArtId: 3}).catch(err => console.log(err));
+models.SurvivorAbility.create({survivorId: 10, abilityId: 1}).catch(err => console.log(err));
+models.SurvivorAbility.create({survivorId: 10, abilityId: 2}).catch(err => console.log(err));
+models.SurvivorAbility.create({survivorId: 10, abilityId: 3}).catch(err => console.log(err));
