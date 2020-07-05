@@ -81,7 +81,9 @@ exports.get_survivor = async (req, res) => {
   console.log("attempting to get survivor on server")
   const survivorId = req.params.survivorId
 
-  findFullSurvivor(survivorId);
+  const survivor = await findFullSurvivor(survivorId);
+  
+  res.json(survivor)
 }
 
 
