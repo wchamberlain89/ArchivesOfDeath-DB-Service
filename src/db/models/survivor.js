@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       autoIncrement: true,
       type: DataTypes.INTEGER,
+      unique: true
     },
     settlementId: {
       allowNull: false,

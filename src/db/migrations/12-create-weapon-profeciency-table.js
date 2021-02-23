@@ -9,13 +9,14 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       survivorId: {
-        allowNull: false,
-        primaryKey: true,
-        references: {
-          model: 'Survivors',
-          key: 'survivorId'
-        },
-        type: Sequelize.INTEGER
+          type: Sequelize.DataTypes.INTEGER,
+          references: {
+            model: {
+              tableName: 'Survivors',
+            },
+            key: 'survivorId'
+          },
+          allowNull: false,
       },
       type: {
         type: Sequelize.INTEGER
