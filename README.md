@@ -26,3 +26,8 @@ Inside the database directory use [sequelize-cli to run seed files](https://sequ
 ```bash
 npx sequelize db:seed:all
 ```
+
+### Start Local Server
+```bash
+npm run test
+```
